@@ -1,1 +1,1 @@
-angular.module('haritApp', []);
+angular.module('haritApp', ['ngMessages']);

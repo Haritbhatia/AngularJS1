@@ -1,17 +1,65 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<!-- Whole story starts here. We refer to a angular js file available on internet. We could also download this file and create a hard reference like we have done below. -->
 <script src="./2angularModule.js"></script>
+<script src="./4angularDirective.js"></script>
+<!-- directive should come before controller. Either in multiple files like here or in a single file or <script> tag-->
 <script src="./3angularController.js"></script>
 
+
 <body ng-app="haritApp">
+    <!-- This tells which module controls the stuff inside. We have created this in 2angularModule.js-->
+    <!-- The ng-app directive tells AngularJS that the <body> element is the "owner" of an 
+        AngularJS application. ng-app could also be on the div tag.It simply means that anything insite this tag knows about angular -->
 
     <div ng-controller="haritController">
-        <!-- The ng-app directive tells AngularJS that the <div> element is the "owner" of an 
-        AngularJS application.Ng - app could also be on the body tag.It simply means that anything insite this tag knows about angular -->
-        <p> Name: <input type="text" ng-model="firstName"> </p>
-        <h1> Hello {{firstName}} </h1>
-        <!-- the name property should be there in the scope -->
+        <!-- Notice that we have declared this controller in 3angularController. Anything that was defined in the $scope 
+    of that controller is now visible inside this div tag -->
+
+        <form name="haritForm">
+
+            <p> First Name: <input name="firstNameInput" required type="text" ng-model="firstName"></p>
+            <!-- required, type tag is from html5. ng-model is from angular. we data bind this input element with the firstName property in $scope of the controller -->
+            <span style="color:red" ng-show="haritForm.firstNameInput.$dirty && haritForm.firstNameInput.$invalid">
+                 <!-- ng-show (boolean) controls the visibility of the tage it is defined on -->
+                 <!-- $dirty and $invalid are special kind of properties from angular. dirty means that user has changed it. invalid means if we have attached any validators with this element, then they should all be satisfied otherwise $invalid will become true -->
+            <span ng-show="haritForm.firstNameInput.$error.required">Name is required.</span>
+            <!--  The above message will show up if the required validator was not satisfied. i.e. had error-->
+            </span>
+
+            <p> Last Name: <input name="lastNameInput" required type="text" ng-model="lastName"></p>
+            <span style="color:red" ng-show="haritForm.lastNameInput.$dirty && haritForm.lastNameInput.$invalid">
+            <span ng-show="haritForm.lastNameInput.$error.required">Last Name is required.</span></span>
+
+            <p> Email Address: <input name="emailAddressInput" required type="email" ng-model="emailAddress"></p>
+            <span style="color:red" ng-show="haritForm.emailAddressInput.$dirty && haritForm.emailAddressInput.$invalid">
+            <span ng-show="haritForm.emailAddressInput.$error.required">Email is required.</span>
+            <span ng-show="haritForm.emailAddressInput.$error.email">Email is not valid.</span></span>
+
+            <p> Confirm Email Address:
+                <input name="confirmEmailAddressInput" required type="email" ng-model="emailAddressConfirm" match="emailAddress"></p>
+            <!-- we defined an angular directive called match. what that directive does is... it takes whatever $scope property you define at the right side 
+                    of = and compares with its own value. If matched then ok otherwise the input tag errors -->
+            <span style="color:red" ng-show="haritForm.confirmEmailAddressInput.$dirty && haritForm.confirmEmailAddressInput.$invalid">
+            <span ng-show="haritForm.confirmEmailAddressInput.$error.required">Email is required.</span>
+            <span ng-show="haritForm.confirmEmailAddressInput.$error.email">Email isn't valid.</span>
+            <span ng-show="haritForm.confirmEmailAddressInput.$error.mismatch">Email Confirm isn't valid.</span>
+            <!-- mismatch is also defined in the directive. If the email addresses don't match then this will raise error (boolean) -->
+            </span>
+
+
+            <h1 ng-show="haritForm.$valid"> Hello {{firstName}} {{lastName}}. Your email address is: {{emailAddress}}. Your form is now valid</h1>
+            <!-- the name property should be there in the scope. This is an example of data binding in angular.-->
+            <!-- This message will only show if the haritForm is valid. Notice ng-show="haritForm.$valid"-->
+
+            <p>
+                <button ng-disabled='haritForm.$invalid' ng-click="onSubmit()">Submit</button>
+                <!-- keep the button disabled if anything on the form "haritForm" is invalid -->
+            </p>
+
+
+        </form>
     </div>
 
 </body>
