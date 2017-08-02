@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="./2angularModule.js"></script>
+<script src="./3angularController.js"></script>
+
+<body ng-app="haritApp">
+
+    <div ng-controller="haritController">
+        <!-- The ng-app directive tells AngularJS that the <div> element is the "owner" of an 
+        AngularJS application.Ng - app could also be on the body tag.It simply means that anything insite this tag knows about angular -->
+        <p> Name: <input type="text" ng-model="firstName"> </p>
+        <h1> Hello {{firstName}} </h1>
+        <!-- the name property should be there in the scope -->
+    </div>
+
+</body>
+
+</html>
