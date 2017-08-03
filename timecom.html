@@ -1,0 +1,138 @@
+<!Doctype html>
+<html>
+<head>
+<title>Time Compare</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+             $(document).ready(function(){
+                 var a,b,stt,endt;
+       /* $(".test1, .test2").blur(function(){
+    var validTime = $(this).val().match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/);
+    if (!validTime) {
+        $(this).val('').css('background', '#fdd');
+    } else {
+        $(this).css('background', 'transparent');
+    }*/
+        
+         $('.test1').focusout(function(){   
+              var validTime = $(this).val().match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/);
+    if (!validTime) {
+        $(this).val('').css('background', '#fdd');
+    } else {
+        $(this).css('background', 'transparent');
+    }
+              a = $(this).val();console.log(a);
+              stt = new Date("July 26, 2017 " + a);
+                stt = stt.getTime();
+                        return stt;
+        });
+        $('.test2').focusout(function(){   
+             var validTime = $(this).val().match(/^(0?[1-9]|1[012])(:[0-5]\d) [APap][mM]$/);
+    if (!validTime) {
+        $(this).val('').css('background', '#fdd');
+    } else {
+        $(this).css('background', 'transparent');
+    }
+            b = $(this).val();console.log(b);
+            endt = new Date("July 26, 2017 " + b);
+            endt = endt.getTime();
+            return endt;
+             });
+            // $("button").click(function(){
+                $('.test2').focusout(function(){
+                 if(stt >= endt)
+                 {
+                         $(".error").remove();
+                         $(this).before('<div class="error"><br>Start-time must be smaller then End-time.</div>');
+                         $(".error").fadeIn().fadeOut("slow");
+                 }
+                 else{
+                    // alert("What's Happening!");
+                    $(".noerror").remove();
+                    $(this).before("<div class='noerror'><br>Entry is Valid!!</div>");
+                    $(".noerror").fadeIn().fadeOut("slow");
+                 }
+                 });
+             //});
+             console.log("Time1: "+ stt + " Time2: " + endt);
+             });
+          //   });
+</script>
+</head>
+<body>
+<div>
+<h4>Main Operational Hours</h6>
+<div>
+<h6>Monday<br></h6>
+<div><br>
+<input class="test1" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Monday][operationalHours][open]">
+</div>
+<div>to<br></div>
+<div><br>
+<input class="test2" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Monday][operationalHours][close]">
+</div>
+</div><br>
+<div>
+<h6>Tuesday<br></h6>
+<div><br>
+<input class="test1" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Tuesday][operationalHours][open]">
+</div>
+<div>to<br></div>
+<div><br>
+<input class="test2" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Tuesday][operationalHours][close]">
+</div>
+</div><br>
+<div>
+<h6>Wednesday<br></h6>
+<div><br>
+<input class="test1" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Wednesday][operationalHours][open]">
+</div>
+<div>to<br></div>
+<div><br>
+<input class="test2" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Wednesday][operationalHours][close]">
+</div>
+</div><br>
+<div>
+<h6>Thursday<br></h6>
+<div><br>
+<input class="test1" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Thursday][operationalHours][open]">
+</div>
+<div>to<br></div>
+<div><br>
+<input class="test2" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Thursday][operationalHours][close]">
+</div>
+</div><br>
+<div>
+<h6>Friday<br></h6>
+<div><br>
+<input class="test1" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Friday][operationalHours][open]">
+</div>
+<div>to<br></div>
+<div><br>
+<input class="test2" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Friday][operationalHours][close]">
+</div>
+</div><br>
+<div>
+<h6>Saturday<br></h6>
+<div><br>
+<input class="test1" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Saturday][operationalHours][open]">
+</div>
+<div>to<br></div>
+<div><br>
+<input class="test2" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Saturday][operationalHours][close]">
+</div>
+</div><br>
+<div>
+<h6>Sunday<br></h6>
+<div><br>
+<input class="test1" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Sunday][operationalHours][open]">
+</div>
+<div>to<br></div>
+<div><br>
+<input class="test2" type="text" placeholder="HH:MM AM/PM" name="data[schedules][Sunday][operationalHours][close]">
+</div>
+</div><br>
+<button type="button" value="click">CLick</button>
+</div>
+</body>
+</html>
